@@ -1,0 +1,6 @@
+*.log
+*.swp
+*.py[co]
+*.egg-info
+
+venv
