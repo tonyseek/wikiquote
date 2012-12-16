@@ -6,7 +6,7 @@ import itertools
 import requests
 import lxml.html
 
-from .consts import LANG_URL, LANG_XPATH, LANG_LABEL_XPATH
+from .consts import LANG_URL, LANG_XPATH, LANG_LABEL_XPATH, DAILY_XPATH
 from .models import Language
 
 
@@ -27,3 +27,9 @@ def fetch_languages():
         url = anchor.get("href")
         language = Language(name=anchor.text, label=label.text, url=url)
         yield language
+
+
+def fetch_current_quote(language):
+    """Gets current daily quote."""
+    etree = fetch_html(language.url)
+    etree.xpath(DAILY_XPATH)

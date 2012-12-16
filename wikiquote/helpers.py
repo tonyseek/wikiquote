@@ -11,7 +11,7 @@ def update_url(parse_result, **kwargs):
     return urlparse.ParseResult(**parse_result_dict)
 
 
-def _make_lru_cache_decorator():
+def make_lru_cache_decorator():
     """Gets a LRU cache decorator in two selection."""
     try:
         from repoze.lru import lru_cache
@@ -20,4 +20,4 @@ def _make_lru_cache_decorator():
     return lru_cache
 
 
-lru_cache = _make_lru_cache_decorator()
+lru_cache = make_lru_cache_decorator()
