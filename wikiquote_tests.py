@@ -15,8 +15,8 @@ class FetchTest(unittest.TestCase):
     """The test case of fetch language."""
 
     EXAMPLE_LANGUAGES = [
-            Language(u"en", u"English", u"http://en.wikiquote.org/wiki/"),
-            Language(u"zh", u"中文", u"http://zh.wikiquote.org/wiki/")]
+            Language(u"en", u"English", u"https://en.wikiquote.org/wiki/"),
+            Language(u"zh", u"中文", u"https://zh.wikiquote.org/wiki/")]
 
     def test_fetch_language(self):
         languages = set(fetch_languages())

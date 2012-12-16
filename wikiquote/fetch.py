@@ -20,12 +20,13 @@ def fetch_html(url, **kwargs):
 
 
 def fetch_languages():
+    """Gets supported languages list of wikiquote site."""
     etree = fetch_html(LANG_URL)
     anchors = etree.xpath(LANG_XPATH)
     labels = etree.xpath(LANG_LABEL_XPATH)
     for anchor, label in itertools.izip(anchors, labels):
-        #: apply
+        #: apply default scheme to url
         href = urlparse.urlparse(anchor.get("href"))
-        url = update_url(href, scheme=href.scheme or "http").geturl()
+        url = update_url(href, scheme=href.scheme or "https").geturl()
         language = Language(name=anchor.text, label=label.text, url=url)
         yield language
