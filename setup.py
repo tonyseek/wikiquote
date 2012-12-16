@@ -1,10 +1,13 @@
 #!?usr/bin/env python2
 
-from setuptools import setup, find_packages
+from setuptools import setup
 
 
 setup(name="wikiquote",
       description="A utility to fetch daily wikiquote.",
       version="0.1",
+      author="TonySeek",
+      author_email="tonyseek@gmail.com",
+      packages=["wikiquote"],
       requires=["requests", "lxml"],
-      packages=find_packages())
+      test_suite="wikiquote_tests")
