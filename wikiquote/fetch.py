@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 #-*- coding:utf-8 -*-
 
-import urlparse
 import itertools
 
 import requests
@@ -9,7 +8,6 @@ import lxml.html
 
 from .consts import LANG_URL, LANG_XPATH, LANG_LABEL_XPATH
 from .models import Language
-from .helpers import update_url
 
 
 def fetch_html(url, **kwargs):
@@ -25,8 +23,7 @@ def fetch_languages():
     anchors = etree.xpath(LANG_XPATH)
     labels = etree.xpath(LANG_LABEL_XPATH)
     for anchor, label in itertools.izip(anchors, labels):
-        #: apply default scheme to url
-        href = urlparse.urlparse(anchor.get("href"))
-        url = update_url(href, scheme=href.scheme or "https").geturl()
+        #: create the language model
+        url = anchor.get("href")
         language = Language(name=anchor.text, label=label.text, url=url)
         yield language

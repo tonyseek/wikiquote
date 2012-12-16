@@ -9,3 +9,15 @@ def update_url(parse_result, **kwargs):
     parse_result_dict = parse_result._asdict()
     parse_result_dict.update(**kwargs)
     return urlparse.ParseResult(**parse_result_dict)
+
+
+def _make_lru_cache_decorator():
+    """Gets a LRU cache decorator in two selection."""
+    try:
+        from repoze.lru import lru_cache
+    except ImportError:
+        from functools import lru_cache
+    return lru_cache
+
+
+lru_cache = _make_lru_cache_decorator()

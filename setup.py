@@ -1,6 +1,15 @@
 #!?usr/bin/env python2
 
+import sys
+
 from setuptools import setup
+
+
+requires = ["requests", "lxml"]
+
+if sys.version_info < (3,):
+    # instead of functools.lrc_cache
+    requires.extend(["repoze.lru"])
 
 
 setup(name="wikiquote",
@@ -9,5 +18,5 @@ setup(name="wikiquote",
       author="TonySeek",
       author_email="tonyseek@gmail.com",
       packages=["wikiquote"],
-      requires=["requests", "lxml"],
+      requires=requires,
       test_suite="wikiquote_tests")

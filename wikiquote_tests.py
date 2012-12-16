@@ -30,6 +30,7 @@ class FetchTest(unittest.TestCase):
             #: label should not contains any special character
             self.assertRegexpMatches(language.label, r"[^!@#\$%\^&*()+-]+")
             #: the url should be valid
+            self.assertIsNotNone(language.url)
             url = urlparse.urlparse(language.url)
             self.assertIn(url.scheme, {"http", "https"})
             self.assertRegexpMatches(url.netloc, r"[a-zA-Z-]+\.wikiquote.org")
