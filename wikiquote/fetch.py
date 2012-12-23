@@ -6,8 +6,8 @@ import itertools
 import requests
 import lxml.html
 
-from .consts import LANG_URL, LANG_XPATH, LANG_LABEL_XPATH, DAILY_XPATH
-from .models import Language
+from .consts import LANG_URL, LANG_XPATH, LANG_LABEL_XPATH
+from .models import Language, QuoteId, Quote
 
 
 def fetch_html(url, **kwargs):
@@ -31,5 +31,9 @@ def fetch_languages():
 
 def fetch_current_quote(language):
     """Gets current daily quote."""
+    quote_id = QuoteId.create(language)
+    quote = Quote(quote_id)
+
     etree = fetch_html(language.url)
-    etree.xpath(DAILY_XPATH)
+    quote.quote_word = "".join(etree.xpath(quote.daily_xpath)).strip()
+    return quote

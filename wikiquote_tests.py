@@ -7,7 +7,7 @@ import urlparse
 import requests.models
 import requests.exceptions
 
-from wikiquote.fetch import fetch_languages
+from wikiquote.fetch import fetch_languages, fetch_current_quote
 from wikiquote.models import Language
 
 
@@ -34,3 +34,8 @@ class FetchTest(unittest.TestCase):
             url = urlparse.urlparse(language.url)
             self.assertIn(url.scheme, {"http", "https"})
             self.assertRegexpMatches(url.netloc, r"[a-zA-Z-]+\.wikiquote.org")
+
+    def test_fetch_daily(self):
+        for language in self.EXAMPLE_LANGUAGES:
+            quote = fetch_current_quote(language)
+            self.assertRegexpMatches(quote.quote_word, r".+")

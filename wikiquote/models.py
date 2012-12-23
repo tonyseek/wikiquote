@@ -49,4 +49,4 @@ class Quote(object):
 
     @property
     def daily_xpath(self):
-        return self.DAILY_CN_XPATH[self.quote_id.language.name]
+        return self.DAILY_XPATH[self.quote_id.language.name]
